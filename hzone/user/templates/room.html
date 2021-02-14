@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    空间
+{% endblock %}
+
+{% block content %}
+
+    <div class="media">
+        <div class="media-left media-middle">
+        <a href="#">
+            <img class="img-circle" src="/{{ user.icon }}" height="100px" width="100px">
+        </a>
+        </div>
+        <div class="media-body">
+            昵称：
+            <h2 class="media-heading">
+                {{ user.username }}    
+            </h2>
+            个性签名：
+            <h4>
+                {{ user.motto }} 
+            </h4>
+        </div>
+    </div>
+{% endblock %}
