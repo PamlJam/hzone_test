@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    留言
+{% endblock %}
+
+{% block content %}
+    
+    {% if user.is_authenticated %}
+        <form id="text_form" action="/board/upload/" method="post" class="form-horizontal">
+            {% csrf_token %}
+            <textarea id="text_box" name="text" placeholder="畅所欲言吧骚年"
+            style="min-height: 100px;min-width: 100%;max-height: 100px;max-width: 100%;"></textarea>
+            <br>
+            <button type="submit" style="width: 100px;">发布</button>
+        </form>
+    {% else %}
+        <h2>请先登录后发布</h2>
+    {% endif %}
+    
+    <hr>
+
+    {% for each in msgs %}
+        <div class="row" style="background-color: aliceblue;">
+            <div class="col-md-2">
+                <br>
+                <a href="/user/{{ each.author.id }}" class="center-block">
+                    <!--  点击头像，进入空间  -->
+                    <img class="media-object" src="/{{ each.author.icon }}" style="height: 100px;width: 100px;">
+                </a>
+                <h4><b>{{ each.author.username }}</b></h4>
+            </div>
+            <div class="col-md-8">
+                <h5>{{ each.time }}</h5>
+                <hr>
+                <p>{{ each.content }}</p>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <br>
+    {% empty %}
+        <h2 style="color: aliceblue;">
+            暂无留言
+        </h2>
+    {% endfor %}
+
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        // id 选择器 : #
+        $('#text_form').submit(function(){
+       	// 拦截提交 submit
+            $.ajax({
+                url:'/board/upload/',
+                // 请求地址，与表单一致
+                type:'POST',
+                // 请求方式，与表单一致
+                data:$('#text_form').serialize(),
+                // 前台数据序列化
+                cache:false,
+                // 缓存关闭
+                success:function(context){
+                // 请求成功回调函数
+                    if(context['status'] == 'SUCCESS'){
+                        alert("提交成功！");
+                        // 弹窗警示
+                        $('#text_box').val('');
+                    }
+                    if(context['status'] == 'NULL'){
+                        alert("提交内容为空");
+                    }
+                },
+            });
+            return false;
+        	// 中断默认动作
+        });
+    </script>
+{% endblock %}	
