@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block title %}
+    更改
+{% endblock %}
+
+{% block content %}
+    <form id="user_form" enctype="multipart/form-data" action="/user/upload/" method="post" style="background-color: aliceblue;">
+        {% csrf_token %}
+        <div class="row">
+            <br>
+            <div class="col-md-1"></div>
+            <div class="col-md-8">
+                <img class="img-circle" src="/{{ user.icon }}" height="100px" width="100px">
+
+                <br><br>
+
+                <input type="file" name="icon">
+                
+                <hr>
+                
+                <div class="form-group">
+                    <label>个性签名</label>
+                    <input type="text" name="motto" class="form-control" placeholder="{{ user.motto }}">
+                </div>
+
+                <hr>
+
+                <div class="form-group">
+                    <label for="exampleInputEmail1">邮箱</label>
+                    <input type="email" name="email" class="form-control" placeholder="{{ user.email }}">
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <hr>
+        <button type="submit" style="width: 40%;" class="center-block">提交更改</button>
+        <hr>
+    </form>
+{% endblock %}
+
+{% block script %}
+    <script type="text/javascript">
+        $('#user_form').submit(function(){
+            $.ajax({
+                url:'/user/upload/',
+                type:'POST',
+                data:$('#user_form').serialize(),
+                cache:false,
+                success:function(){
+                    alert("修改成功");
+                },
+            });
+        });
+    </script>
+{% endblock %}

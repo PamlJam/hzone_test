@@ -1,25 +1,24 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    空间
+    {{ id_user.username }}の空间
 {% endblock %}
 
 {% block content %}
-
-    <div class="media">
+    <div style="background-color: aliceblue;" class="media">
         <div class="media-left media-middle">
         <a href="#">
-            <img class="img-circle" src="/{{ user.icon }}" height="100px" width="100px">
+            <img class="img-circle" src="/{{ id_user.icon }}" height="100px" width="100px">
         </a>
         </div>
         <div class="media-body">
             昵称：
             <h2 class="media-heading">
-                {{ user.username }}    
+                {{ id_user.username }}    
             </h2>
             个性签名：
             <h4>
-                {{ user.motto }} 
+                {{ id_user.motto }} 
             </h4>
         </div>
     </div>
