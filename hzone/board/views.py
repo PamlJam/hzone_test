@@ -20,9 +20,6 @@ def msg_upl(request):
             newmsg.save()
             context = {
                 'status' :"SUCCESS",
-                'author' : newmsg.author.username,
-                'time' : newmsg.time,
-                'content' : newmsg.content,
             }
         else:
         # 提交文本为空

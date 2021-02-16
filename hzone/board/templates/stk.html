@@ -20,52 +20,48 @@
     
     <hr>
 
-    {% for each in msgs %}
-        <div class="row" style="background-color: aliceblue;">
-            <div class="col-md-2">
-                <br>
-                <a href="/user/{{ each.author.id }}" class="center-block">
-                    <!--  点击头像，进入空间  -->
-                    <img class="media-object" src="/{{ each.author.icon }}" style="height: 100px;width: 100px;">
-                </a>
-                <h4><b>{{ each.author.username }}</b></h4>
+    <div id="stk">
+        {% for each in msgs %}
+            <div class="row" style="background-color: aliceblue;">
+                <div class="col-md-2">
+                    <br>
+                    <a href="/user/{{ each.author.id }}" class="center-block">
+                        <!--  点击头像，进入空间  -->
+                        <img class="media-object" src="/{{ each.author.icon }}" style="height: 100px;width: 100px;">
+                    </a>
+                    <h4><b>{{ each.author.username }}</b></h4>
+                </div>
+                <div class="col-md-8">
+                    <h5>{{ each.time }}</h5>
+                    <hr>
+                    <p>{{ each.content }}</p>
+                </div>
+                <div class="col-md-2"></div>
             </div>
-            <div class="col-md-8">
-                <h5>{{ each.time }}</h5>
-                <hr>
-                <p>{{ each.content }}</p>
-            </div>
-            <div class="col-md-2"></div>
-        </div>
-        <br>
-    {% empty %}
-        <h2 style="color: aliceblue;">
-            暂无留言
-        </h2>
-    {% endfor %}
+            <br>
+        {% empty %}
+            <h2 style="color: aliceblue;">
+                暂无留言
+            </h2>
+        {% endfor %}
+    </div>
 
 {% endblock %}
 
 {% block script %}
     <script type="text/javascript">
-        // id 选择器 : #
         $('#text_form').submit(function(){
-       	// 拦截提交 submit
             $.ajax({
                 url:'/board/upload/',
-                // 请求地址，与表单一致
                 type:'POST',
-                // 请求方式，与表单一致
                 data:$('#text_form').serialize(),
-                // 前台数据序列化
                 cache:false,
-                // 缓存关闭
                 success:function(context){
-                // 请求成功回调函数
                     if(context['status'] == 'SUCCESS'){
-                        alert("提交成功！");
-                        // 弹窗警示
+                        $("#stk").load(location.href + " #stk");
+                        // 局部刷新
                         $('#text_box').val('');
+                        // 清空输入
                     }
                     if(context['status'] == 'NULL'){
                         alert("提交内容为空");
@@ -76,4 +72,4 @@
         	// 中断默认动作
         });
     </script>
-{% endblock %}	
+{% endblock %}
