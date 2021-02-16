@@ -2,12 +2,21 @@ from django.shortcuts import render
 from .models import Message
 from django.http import Http404
 from django.http import JsonResponse
+from django.core.paginator import Paginator
 
 def msg_stk(request):
     context = {}
-    msgs = Message.objects.all()
-    context['msgs'] = msgs
-    return render(request,'stk.html',context)
+    if request.method == 'GET':
+        msgs = Message.objects.all()
+        paginator = Paginator(msgs,4)
+        # 分页设置
+        n = request.GET.get("page",1)
+        # 获取页数
+        p = paginator.get_page(n)
+        # 获取页面
+        context['msgs'] = p
+
+        return render(request,'stk.html',context)
 
 def msg_upl(request):
     user = request.user

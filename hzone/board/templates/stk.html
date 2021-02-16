@@ -19,7 +19,7 @@
     {% endif %}
     
     <hr>
-
+        
     <div id="stk">
         {% for each in msgs %}
             <div class="row" style="background-color: aliceblue;">
@@ -50,6 +50,7 @@
 
 {% block script %}
     <script type="text/javascript">
+    // 增加消息
         $('#text_form').submit(function(){
             $.ajax({
                 url:'/board/upload/',
@@ -72,4 +73,28 @@
         	// 中断默认动作
         });
     </script>
+
+    <script>
+        var url = window.location.href;
+        // 网址
+        var arg = url.split('=')[0];
+        // 参数
+        var num = parseInt(url.split('=')[1]);
+        // 页码
+        console.log(num);
+
+        $(document).ready(function(){
+            $(window).scroll(function(){
+                var past = $(window).scrollTop(); 
+                var now = $(window).height();
+                var total = $(document).height();
+                if (total - 50 <= past + now && num){
+                    num += 1;
+                    next_page = arg + '=' +num ;
+                    $("#stk").load(next_page +" #stk");
+                }
+            });
+        });
+    </script>
+
 {% endblock %}
