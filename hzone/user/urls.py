@@ -10,5 +10,5 @@ urlpatterns =[
     # 注销按钮
     path('log_in/',views.log_in),
     # 登录按钮
-
+    path('register/',views.register),
 ]

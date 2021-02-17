@@ -8,6 +8,42 @@ from django.shortcuts import redirect
 from django.contrib.auth import authenticate
 from django.http import JsonResponse
 
+def register(request):
+    context = {}
+    if request.user.is_authenticated:
+        raise Http404('None')
+
+    if request.method == 'GET' :
+        response = render(request,'register.html',context)
+        return response
+
+    if request.method == 'POST' :
+        
+        un = request.POST.get('un','')
+        pw = request.POST.get('pw','')
+        re = request.POST.get('re','')
+
+        if not 5<len(un)<10:
+            context['status'] = '5<len(un)<10'
+        elif not 5<len(pw)<10:
+            context['status'] = '5<len(pw)<10'
+        elif pw!=re:
+        # 输入不一致
+            context['status'] = 'not consistent'
+        elif User.objects.filter(username= un).exists():
+        # 用户已存在
+            context['status'] = 'user already exists'
+        else:
+            context['status'] = 'SUCCESS'
+            
+            new_user = User.objects.create_user(un,None,pw)
+            new_user.save()
+
+            login(request,new_user)
+
+        return JsonResponse(context)
+
+
 def log_in(request):
     
     if request.user.is_authenticated:
