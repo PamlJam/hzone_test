@@ -12,10 +12,12 @@ def msg_stk(request):
         # 分页设置
         n = request.GET.get("page",1)
         # 获取页数
+        if int(n) > paginator.num_pages:
+            raise Http404('None')
+            
         p = paginator.get_page(n)
         # 获取页面
         context['msgs'] = p
-
         return render(request,'stk.html',context)
 
 def msg_upl(request):
