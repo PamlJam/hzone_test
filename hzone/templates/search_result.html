@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+    搜索
+{% endblock %}
+
+{% block content %}
+    {% for u in us %}
+    <!-- 遍历搜索结果 -->
+        <div style="background-color: aliceblue;" class="media">
+            <div class="media-left media-middle">
+            <a href="/user/{{ u.id }}">
+            <!-- 跳转至个人空间 -->
+                <img class="img-circle" src="/{{ u.icon }}" height="75px" width="75px">
+            </a>
+            </div>
+            <div class="media-body">
+                昵称：
+                <h3 class="media-heading">
+                    {{ u.username }}    
+                </h3>
+                个性签名：
+                <h5>
+                    {{ u.motto }} 
+                </h5>
+            </div>
+        </div>
+    {% empty %}
+        <div style="background-color: aliceblue;">
+            <h2>内容为空</h2>
+        </div>
+    {% endfor %}
+{% endblock %}

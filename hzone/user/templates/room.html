@@ -5,21 +5,27 @@
 {% endblock %}
 
 {% block content %}
-    <div style="background-color: aliceblue;" class="media">
-        <div class="media-left media-middle">
-        <a href="#">
-            <img class="img-circle" src="/{{ id_user.icon }}" height="100px" width="100px">
-        </a>
-        </div>
-        <div class="media-body">
-            昵称：
-            <h2 class="media-heading">
-                {{ id_user.username }}    
-            </h2>
-            个性签名：
-            <h4>
-                {{ id_user.motto }} 
-            </h4>
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <img class="img-circle" src="/{{ id_user.icon }}" height="100px" width="100px">
+                </div>
+                <div class="col-md-10">
+                    <h2>
+                        {{ id_user.username }}
+                    </h2>
+                    {% if id_user.motto %}
+                        <p>
+                            {{ id_user.motto }}
+                        </p>
+                    {% else %}
+                        <p>
+                            这个人很懒，什么也没有写
+                        </p>
+                    {% endif %}  
+                </div>
+            </div>        
         </div>
     </div>
 {% endblock %}

@@ -44,13 +44,24 @@
                       <li><a href="/board">留言</a></li>
                     </ul>
                     <!-- 左侧三个link -->
-                    <form class="navbar-form navbar-left">
+
+
+
+
+                    <form class="navbar-form navbar-left" action="/search/"> <!-- 搜索框 -->
+                    <!-- 默认采用 GET 请求 -->
+
                       <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input name="wd" type="text" class="form-control" placeholder="搜索用户、帖子">
+                        <!-- http://127.0.0.1:8000/search/?wd=123 -->
+                        <!-- 传递参数 -->
                       </div>
-                      <button type="submit" class="btn btn-default">Submit</button>
+                      <button type="submit" class="btn btn-default">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                        <!-- 替换样式 -->
+                      </button>
                     </form>
-                    <!-- 搜索框 -->
+                    
                     <ul class="nav navbar-nav navbar-right">
                       <li><a href="#">发表</a></li>
                       <li class="dropdown">
