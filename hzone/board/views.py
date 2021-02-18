@@ -19,6 +19,7 @@ def msg_stk(request):
         context['msgs'] = p
         return render(request,'stk.html',context)
 
+    
 def msg_upl(request):
     user = request.user
     if user.is_authenticated and request.method == 'POST':

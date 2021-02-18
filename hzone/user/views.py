@@ -7,6 +7,8 @@ from django.http import Http404
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate
 from django.http import JsonResponse
+from blog.models import Article
+
 
 def register(request):
     context = {}
@@ -93,7 +95,10 @@ def room(request,user_id):
         id_user.browse += 1
         id_user.save()
     context = {}
+    articles = Article.objects.filter(author = id_user)
     context['id_user'] = id_user
+    context['articles'] = articles
+    
     response = render(request,'room.html',context)
     response.set_cookie(str(request.user.id) + 'browse','1',max_age=3)
     return response

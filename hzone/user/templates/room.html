@@ -31,4 +31,27 @@
             </div>
         </div>
     </div>
+
+
+
+    {% for each in articles %}
+        <div style="background-color: aliceblue;" >
+            <a href="/blog/{{ each.id }}">
+                <h3>{{ each.title }}</h3>
+            </a>
+            <p>
+                {{ each.content |truncatechars:75 }}
+            </p>
+            <h5>
+                {{ each.create_time }} | {{ each.type.title }}
+            </h5>
+        </div>
+        <br>
+    {% empty %}
+        <h2>
+            暂时没有内容
+        </h2>
+    {% endfor %}
+
+
 {% endblock %}

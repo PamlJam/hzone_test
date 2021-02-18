@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    博客
+{% endblock %}
+{% block content %}
+    {% for each in articles %}
+        <div class="row" style="background-color: aliceblue;">
+            <div class="col-md-2">
+                <a href="/user/{{ each.author.id }}">
+                    <img class="media-object" src="/{{ each.author.icon }}" style="height: 100px;width: 100px;">
+                </a>
+                <h3>{{ each.author }}</h3>
+            </div>
+            <div class="col-md-8">
+                <a href="/blog/{{ each.id }}">
+                    <h3>{{ each.title }}</h3>
+                </a>
+                <p>
+                    {{ each.content |truncatechars:75 }}
+                </p>
+                <h5>
+                    {{ each.create_time }} | {{ each.type.title }}
+                </h5>
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+        <br>
+    {% empty %}
+        <h2>
+            暂时没有内容
+        </h2>
+    {% endfor %}
+{% endblock %}

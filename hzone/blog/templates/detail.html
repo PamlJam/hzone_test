@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    详情
+{% endblock %}
+
+{% block content %}
+
+    <div class="row" style="background-color: aliceblue;">
+        <div class="col-md-2">
+            
+        </div>
+        <div class="col-md-8">
+            <h5 class="text-left">
+                <a href="#">
+                    << {{ article.type.title }}
+                </a>
+            </h5>
+            <div  class="text-center">
+                <h3>
+                    {{ article.title }}
+                </h3>
+            </div>
+            <p>
+                {{ article.content }}
+            </p>
+            <div class="text-right">
+                <h5>
+                    {{ article.create_time }}
+                </h5>
+                <h5>
+                    {{ article.update_time }}
+                </h5>
+            </div>
+            <a href="/user/{{ article.author.id }}">
+                <h3>
+                    {{ article.author }}
+                </h3>
+                <h5>
+                    {{ article.author.motto }}
+                </h5>
+            </a>
+            <br>
+
+        </div>
+
+        <div class="col-md-2">
+            
+        </div>
+    </div>
+{% endblock %}

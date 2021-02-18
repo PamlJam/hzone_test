@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'board',
     # app_2nd 留言板
 
+    'blog',
 ]
 
 MIDDLEWARE = [
