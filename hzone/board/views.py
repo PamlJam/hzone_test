@@ -14,7 +14,6 @@ def msg_stk(request):
         # 获取页数
         if int(n) > paginator.num_pages:
             raise Http404('None')
-            
         p = paginator.get_page(n)
         # 获取页面
         context['msgs'] = p

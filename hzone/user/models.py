@@ -5,3 +5,5 @@ class User(AbstractUser):
     # 个性签名
     icon = models.ImageField(default="./static/icon/default.jpg",upload_to='./static/icon/')
     # 用户头像
+    browse = models.IntegerField(default=0)
+    # 浏览次数

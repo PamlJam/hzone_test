@@ -45,7 +45,6 @@ def register(request):
 
 
 def log_in(request):
-    
     if request.user.is_authenticated:
         raise Http404('None')
     elif request.method == 'POST':
@@ -88,15 +87,16 @@ def upload(request):
 
         return render(request,'update.html',{})
 
-
 def room(request,user_id):
     id_user = get_object_or_404(User,id = user_id)
+    if not request.COOKIES.get(str(request.user.id) + 'browse'):
+        id_user.browse += 1
+        id_user.save()
     context = {}
     context['id_user'] = id_user
-    
     response = render(request,'room.html',context)
+    response.set_cookie(str(request.user.id) + 'browse','1',max_age=3)
     return response
-
 
 def update(request):
     context = {}

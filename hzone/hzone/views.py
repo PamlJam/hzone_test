@@ -9,6 +9,7 @@ def home(request):
     return response
 
 def search(request):
+    
     context = {}
     wds = request.GET.get('wd').strip()
     # 截去空格
