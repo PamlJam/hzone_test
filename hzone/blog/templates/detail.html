@@ -5,17 +5,18 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="row" style="background-color: aliceblue;">
+        <ol class="breadcrumb">
+            <li><a href="#">博客</a></li>
+            <li><a href="#">{{ article.type.title }}</a></li>
+            <li class="active">{{ article.title }}</li>
+        </ol>
+
         <div class="col-md-2">
             
         </div>
+
         <div class="col-md-8">
-            <h5 class="text-left">
-                <a href="#">
-                    << {{ article.type.title }}
-                </a>
-            </h5>
             <div  class="text-center">
                 <h3>
                     {{ article.title }}
@@ -49,3 +50,5 @@
         </div>
     </div>
 {% endblock %}
+
+

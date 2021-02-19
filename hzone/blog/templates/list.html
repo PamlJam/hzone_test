@@ -33,3 +33,20 @@
         </h2>
     {% endfor %}
 {% endblock %}
+
+{% block script %}
+    <script>
+        var pos = {{ pos }};
+        window.scrollTo(0,pos);
+        $(window).scroll(function(){
+            var past = $(window).scrollTop(); 
+            $.ajax({
+                url:'/blog',
+                type:'GET',
+                data:{"pos": String( past )},
+                // 传入当前位置
+                cache:false,
+            });
+        });
+    </script>
+{% endblock %}
