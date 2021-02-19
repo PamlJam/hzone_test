@@ -17,7 +17,8 @@
                     <h3>{{ each.title }}</h3>
                 </a>
                 <p>
-                    {{ each.content |truncatechars:75 }}
+                    {{ each.content |striptags|safe|truncatechars:75  }}
+                    
                 </p>
                 <h5>
                     {{ each.create_time }} | {{ each.type.title }}

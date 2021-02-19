@@ -23,14 +23,14 @@
                 </h3>
             </div>
             <p>
-                {{ article.content }}
+                {{ article.content | safe }}
             </p>
             <div class="text-right">
                 <h5>
-                    {{ article.create_time }}
+                    发布于<b>{{ article.create_time }}</b>
                 </h5>
                 <h5>
-                    {{ article.update_time }}
+                    编辑于<b>{{ article.update_time }}</b>
                 </h5>
             </div>
             <a href="/user/{{ article.author.id }}">
@@ -42,11 +42,8 @@
                 </h5>
             </a>
             <br>
-
         </div>
-
         <div class="col-md-2">
-            
         </div>
     </div>
 {% endblock %}

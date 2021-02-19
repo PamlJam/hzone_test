@@ -16,7 +16,7 @@
                         {{ id_user.username }}
                     </h2>
                     {% if id_user.motto %}
-                        <p>
+                        <p>                            
                             {{ id_user.motto }}
                         </p>
                     {% else %}
@@ -24,9 +24,9 @@
                             这个人很懒，什么也没有写
                         </p>
                     {% endif %}
-                    <h5>
-                        浏览次数 {{ id_user.browse }}
-                    </h5>
+                    <p>
+                        <div class="glyphicon glyphicon-eye-open"> {{ id_user.browse }}</div>
+                    </p>
                 </div>
             </div>
         </div>

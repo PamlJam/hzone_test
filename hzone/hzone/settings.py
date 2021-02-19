@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     'board',
     # app_2nd 留言板
 
-    'blog',
+    'blog', # 博客
+    
+    'ckeditor',# 富文本编辑器
 ]
 
 MIDDLEWARE = [

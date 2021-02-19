@@ -3,18 +3,51 @@ from django.shortcuts import get_object_or_404
 from .models import User
 from django.contrib.auth import login
 from django.contrib.auth import logout
-from django.http import Http404
+from django.http import Http404, response
 from django.shortcuts import redirect
 from django.contrib.auth import authenticate
 from django.http import JsonResponse
 from blog.models import Article
+from blog.models import ArticleType
 
+def write(request):
+    user = request.user
+    context = {}
+
+    if not user.is_authenticated:
+        raise Http404('None')
+
+    if request.method == 'GET' :
+        context ['types'] = ArticleType.objects.filter(author = user)
+        response =  render(request,'write.html',context)
+        return response
+
+    if request.method == 'POST' :
+        title =  request.POST.get('title','')
+        content = request.POST.get('content','')
+        type =  request.POST.get('type','')    
+        if not type:
+            context = {'status' : 'NONE'}
+            return JsonResponse(context)
+
+        if title and content:
+            new_article = Article()
+            new_article.type = get_object_or_404(ArticleType,title = type)
+            new_article.author = user
+            new_article.title = title
+            new_article.content = content
+            new_article.save()
+            context = {'status' : 'SUCCESS'}
+        else:
+            context = {'status' : 'NULL'}
+
+        return JsonResponse(context)
 
 def register(request):
-    context = {}
     if request.user.is_authenticated:
         raise Http404('None')
 
+    context = {}
     if request.method == 'GET' :
         response = render(request,'register.html',context)
         return response
