@@ -4,9 +4,8 @@ from ckeditor.fields import RichTextField
 
 class ArticleType(models.Model):
     title = models.CharField(max_length=30)
-    author = models.ForeignKey(User,on_delete=models.DO_NOTHING)
 
-
+    
 class Article(models.Model):
     author = models.ForeignKey(User,on_delete=models.DO_NOTHING)
     title = models.CharField(max_length=30)

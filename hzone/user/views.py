@@ -18,7 +18,7 @@ def write(request):
         raise Http404('None')
 
     if request.method == 'GET' :
-        context ['types'] = ArticleType.objects.filter(author = user)
+        context ['types'] = ArticleType.objects.all()
         response =  render(request,'write.html',context)
         return response
 
@@ -29,7 +29,6 @@ def write(request):
         if not type:
             context = {'status' : 'NONE'}
             return JsonResponse(context)
-
         if title and content:
             new_article = Article()
             new_article.type = get_object_or_404(ArticleType,title = type)
